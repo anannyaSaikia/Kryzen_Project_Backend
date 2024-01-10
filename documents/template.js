@@ -27,7 +27,7 @@ module.exports = ({ name, age, address, image }) => {
         </head>
         <body>
             <div class="mainDiv">
-            <img src='http://localhost:8000/uploads/${image}' alt="avatar">
+            <img src='https://kryzen-project-backend.cyclic.app/uploads/${image}' alt="avatar">
             <h4>Name : ${name}</h4>
             <h4>Age : ${age}</h4>
             <h4>Address : ${address}</h4>
