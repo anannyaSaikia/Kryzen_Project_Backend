@@ -24,14 +24,6 @@ formRouter.post("/add", upload.single('image'), async (req, res) => {
     const { name, age, address } = req.body
     const image = req.file.filename
 
-    pdf.create(pdfTemplate({ name, age, address, image }), {}).toFile('user.pdf', (err) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log('PDF generated successfully')
-        }
-    })
-
     await UserDetailsModel.findOneAndDelete(user_id)  
 
     const new_detail = new UserDetailsModel({
@@ -45,6 +37,13 @@ formRouter.post("/add", upload.single('image'), async (req, res) => {
 
     try {
         await new_detail.save();
+        pdf.create(pdfTemplate({ name, age, address, image }), {}).toFile('user.pdf', (err) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log('PDF generated successfully')
+            }
+        })
         res.status(200).send({ msg: "Details added successfully" })
     } catch (error) {
         res.status(500).send({ msg: "Something went wrong. Please try again!", error: error })
