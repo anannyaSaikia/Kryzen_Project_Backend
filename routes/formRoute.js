@@ -8,6 +8,7 @@ const pdfTemplate = require('../documents/template')
 
 const formRouter = Router()
 
+@Crossorigin
 formRouter.post("/add", upload.single('image'), async (req, res) => {
     const user_id = req.user_id
 
