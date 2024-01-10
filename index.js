@@ -16,7 +16,8 @@ app.use(express.json())
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }; */
 app.use(cors({
-    origin : '*'
+    origin : 'https://659ef504cebb091e596b09e3--kryzen-project-frontend.netlify.app/form',
+    optionsSuccessStatus: 200,
 }));
 
 app.use('/uploads', express.static('uploads'))
