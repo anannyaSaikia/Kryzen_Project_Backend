@@ -1,12 +1,22 @@
 const { Router } = require("express")
 const { UserDetailsModel } = require("../models/UserDetails.model")
 const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
 const pdf = require('html-pdf')
-
 const pdfTemplate = require('../documents/template')
-
 const formRouter = Router()
+
+/* const upload = multer({ dest: 'uploads/' }) */
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/'); // Set the destination folder for uploads
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname); // Set the file name
+    },
+  });
+  
+  const upload = multer({ storage: storage });
 
 formRouter.post("/add", upload.single('image'), async (req, res) => {
     const user_id = req.user_id
