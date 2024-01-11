@@ -15,10 +15,19 @@ app.use(express.json())
     origin: 'https://kryzen-project-frontend.netlify.app',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }; */
-app.use(cors({
-    origin : 'https://659ef504cebb091e596b09e3--kryzen-project-frontend.netlify.app',
-    optionsSuccessStatus: 200,
-}));
+
+var whitelist = ['https://kryzen-project-frontend.netlify.app', 'https://kryzen-project-frontend.netlify.app/form', 'https://kryzen-project-frontend.netlify.app/download']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 
 app.use('/uploads', express.static('uploads'))
 
