@@ -5,6 +5,7 @@ const userDetailsSchema = new mongoose.Schema({
     age : {type : Number, required : true},
     address : {type : String, required : true},
     image : {type : String, required : true},
+    num_array : {type: [String]},
     user_id : {type : String}
 })
 

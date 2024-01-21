@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mainDiv {
+            margin: auto;
+            width: 70vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .mainDiv>img {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainDiv">
+        <div id="profile"></div>
+        <div><h4>Name : <%= name %></div>
+        <div><h4>Age : <%= age %></div>
+        <div><h4>Address : <%= address %></h4></div>
+
+        <h4>Numbers List</h4>
+        <table>
+            <tbody id="table_body">
+                <% for (let item of num_array) { %>
+                    <tr><td><%= item %></td></tr>
+                 <% } %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let profile = document.getElementById("profile");
+        let profile_image = document.createElement("img")
+        profile_image.setAttribute("src", `http://localhost:8000/uploads/${image}`)
+        profile.append(profile_image)
+
+        let table_body = document.getElementById("table_body");
+        for (let i = 0; i < num_array.length; i++) {
+            let tr = document.createElement("tr")
+            let td = document.createElement("td")
+            td.textContent = num_array[i]
+            tr.append(td)
+            table_body.append(tr)
+        }
+    </script>
+</body>
+
+</html>
